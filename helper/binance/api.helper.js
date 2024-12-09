@@ -1,22 +1,30 @@
 const crypto = require('crypto');
 const axios = require('axios');
 const { apiKey, secretKey } = require("dotenv").config().parsed;
-
+async function getServerTime() {
+    const response = await axios.get('https://testnet.binancefuture.com/fapi/v1/time');
+    return response.data.serverTime;
+}
 
 function signRequest(params) {
-    const query = Object.keys(params)
-        .sort()
-        .map((key) => `${key}=${params[key]}`)
+    const queryString = Object.keys(params)
+
+        .map(key => `${key}=${encodeURIComponent(params[key])}`)
         .join('&');
-    return crypto.createHmac('sha256', secretKey).update(query).digest('hex');
+    console.log('Query String:', queryString);
+    const signature = crypto.createHmac('sha256', secretKey).update(queryString).digest('hex');
+    console.log('Generated Signature:', signature);
+    return signature;
 }
 
 
-async function get_balance() {
-    const endpoint = '/fapi/v2/account';
-    const params = { timestamp: Date.now() };
-    params.signature = signRequest(params);
 
+async function get_balance() {
+    const endpoint = '/fapi/v2/balance';
+    const params = {};
+    params.timestamp = await getServerTime();
+    params.signature = signRequest(params);
+    console.log(params)
     try {
         const response = await axios.get(`https://testnet.binancefuture.com${endpoint}`, {
             headers: { 'X-MBX-APIKEY': apiKey },
@@ -30,21 +38,26 @@ async function get_balance() {
 }
 
 
-async function place_order(symbol, side, quantity, price = null, orderType = 'LIMIT') {
+async function place_order(symbol, side, type, quantity, price) {
     const endpoint = '/fapi/v1/order';
     const params = {
-        symbol,
-        side,
-        type: orderType,
-        quantity,
-        timestamp: Date.now(),
-    };
+        symbol: symbol,
+        side: side,
+        type: type,
+        quantity: quantity,
 
-    if (orderType === 'LIMIT') {
+    };
+    params.timestamp = await getServerTime();
+    if (type === 'LIMIT') {
         params.price = price;
         params.timeInForce = 'GTC';
     }
-
+    Object.keys(params).forEach((key) => {
+        if (params[key] === undefined) {
+            delete params[key];
+        }
+    });
+    console.log(params)
     params.signature = signRequest(params);
 
     try {
