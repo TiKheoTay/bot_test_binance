@@ -1,4 +1,4 @@
-const { cancle_order_binance } = require("../helper/binance/api.helper");
+const { cancle_order } = require("../helper/binance/api.helper");
 
 
 const params = {
@@ -9,5 +9,5 @@ const params = {
     timestamp: Date.now(),
 };
 
-cancle_order_binance(params);
+cancle_order(params);
 

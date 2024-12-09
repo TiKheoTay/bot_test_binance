@@ -1,9 +1,9 @@
-const { queryOrdersBinance } = require("../helper/binance/api.helper");
+const { query_order } = require("../helper/binance/api.helper");
 
 const params = {
-    symbol: "BTCUSDT",
+    symbol: "ETHUSDT",
     limit: 10,
     timestamp: Date.now(),
 };
 
-queryOrdersBinance(params);
+query_order(params);
