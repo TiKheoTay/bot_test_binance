@@ -1,0 +1,25 @@
+{
+  "name": "bot_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "asciichart": "^1.5.25",
+    "axios": "^1.7.8",
+    "bot_test": "file:",
+    "ccxt": "^4.4.34",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.6",
+    "fs": "^0.0.1-security",
+    "jsdom": "^25.0.1",
+    "path": "^0.12.7",
+    "winson": "^1.0.0",
+    "winston": "^3.17.0",
+    "ws": "^8.18.0"
+  }
+}
