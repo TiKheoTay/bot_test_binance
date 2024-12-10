@@ -1,7 +1,7 @@
 var WebSocket = require("ws");
 const { JSDOM } = require("jsdom");
 
-global.document = window.document;
+// global.document = window.document;
 
 let ws_binance;
 

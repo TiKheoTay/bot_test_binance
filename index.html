@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD with Auth</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">User Authentication & CRUD</h1>
+        <div id="auth-section">
+            <!-- Register Form -->
+            <div id="register-form" class="card p-4 my-4">
+                <h3>Register</h3>
+                <div class="mb-3">
+                    <label for="reg-username" class="form-label">Username</label>
+                    <input type="text" id="reg-username" class="form-control" placeholder="Enter username">
+                </div>
+                <div class="mb-3">
+                    <label for="reg-password" class="form-label">Password</label>
+                    <input type="password" id="reg-password" class="form-control" placeholder="Enter password">
+                </div>
+                <button id="register-btn" class="btn btn-primary">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form" class="card p-4 my-4">
+                <h3>Login</h3>
+                <div class="mb-3">
+                    <label for="login-username" class="form-label">Username</label>
+                    <input type="text" id="login-username" class="form-control" placeholder="Enter username">
+                </div>
+                <div class="mb-3">
+                    <label for="login-password" class="form-label">Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="Enter password">
+                </div>
+                <button id="login-btn" class="btn btn-success">Login</button>
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard-section" class="d-none">
+            <h3>Welcome, <span id="current-user"></span></h3>
+            <button id="logout-btn" class="btn btn-danger my-3">Logout</button>
+
+            <h4>Manage Users</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table">
+                    <!-- Dynamic user rows -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
